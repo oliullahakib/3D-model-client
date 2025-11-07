@@ -64,7 +64,7 @@ const NavBar = () => {
             </li>
           </ul>
         </div>
-        <Link to={"/"} className="flex items-center gap-1 text-xl font-bold">
+        <Link to={"/"} className="flex items-center gap-1 md:text-xl font-bold">
           <LuRotate3D /> 3D Models Hub
         </Link>
       </div>
@@ -87,11 +87,13 @@ const NavBar = () => {
             </NavLink>
           </li>
 
-          <li>
+         {
+            user&& <li>
             <NavLink to={"/profile"}>
               <FaUser /> Profile
             </NavLink>
           </li>
+         }
         </ul>
       </div>
       <div className="navbar-end gap-3">

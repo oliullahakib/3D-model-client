@@ -1,12 +1,11 @@
 import { use } from "react";
-import toast from "react-hot-toast";
 import { AuthContext } from "../Context/AuthContext";
+import useAxios from "../hook/useAxios";
+import Swal from "sweetalert2";
 
 const AddModal = () => {
-
   const { user } = use(AuthContext)
-
-
+  const axiosInstance = useAxios()
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -17,20 +16,19 @@ const AddModal = () => {
       thumbnail: e.target.thumbnail.value,
       created_at: new Date(),
       downloads: 0,
-      created_by: user.email
+      created_by: user?.email
     }
 
-    fetch('https://3d-model-server.vercel.app/models', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(res => res.json())
+    axiosInstance.post("/models",formData)
     .then(data=> {
-      toast.success("Successfully added!")
-      console.log(data)
+
+      if(data.data.insertedId){
+      Swal.fire({
+      title: "Added!",
+      text: "Your Model has been Added.",
+      icon: "success"
+    });
+      }
     })
     .catch(err => {
       console.log(err)

@@ -6,6 +6,7 @@ import ModelDetails from "../pages/ModelDetails";
 import AddModel from "../pages/AddModal";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 export const router = createBrowserRouter([
     {
         path:'/',
@@ -18,7 +19,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/model-details/:id',
-                element:<ModelDetails/>,
+                element:<PrivateRoute><ModelDetails/></PrivateRoute>,
                  loader:({params})=>axios.get(`http://localhost:3000/model-details/${params.id}`)
             },
             {
@@ -27,7 +28,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/auth/login',
-                Component:Login
+                element:<Login/>
             }
             ,
             {

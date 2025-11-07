@@ -19,7 +19,7 @@ const ModelDetails = () => {
                             {model.name}
                         </h1>
 
-                        <div className="flex gap-3">
+                        <div className="flex flex-col md:flex-row gap-3">
                             <div className="badge badge-lg badge-outline text-pink-600 border-pink-600 font-medium">
                                 {model.category}
                             </div>
@@ -33,7 +33,7 @@ const ModelDetails = () => {
                             {model.description}
                         </p>
 
-                        <div className="flex gap-3 mt-6">
+                        <div className="flex flex-col md:flex-row gap-3 mt-6">
                             <Link
                                 to={`/update-model/${model._id}`}
                                 className="btn btn-primary rounded-full bg-linear-to-r from-pink-500 to-red-600 text-white border-0 hover:from-pink-600 hover:to-red-700"

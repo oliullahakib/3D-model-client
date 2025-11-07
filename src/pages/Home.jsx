@@ -4,12 +4,11 @@ import { ModelCard } from "../components/ModelCard";
 
 const Home = () => {
     const models = useLoaderData()
-    console.log(models.data)
     return (
         <div>
               <Banner/>
             <div className="text-center text-xl font-bold mt-10">Latest Model</div>
-             <div className="grid grid-cols-3 lg:grid-cols-4 gap-3 mt-10">
+             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-10">
             
             {
               models.data.map(model=><ModelCard key={model._id} model={model} />)
