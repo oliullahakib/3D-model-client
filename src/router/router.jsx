@@ -7,6 +7,7 @@ import AddModel from "../pages/AddModal";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import AllModels from "../pages/AllModels";
 export const router = createBrowserRouter([
     {
         path:'/',
@@ -34,7 +35,14 @@ export const router = createBrowserRouter([
             {
                 path:'/auth/register',
                 Component:Register
+            },
+            
+            {
+                path:'/all-models',
+                Component:AllModels,
+                 loader:()=>axios.get(`http://localhost:3000/models`)
             }
+
         ]
     }
 ])
