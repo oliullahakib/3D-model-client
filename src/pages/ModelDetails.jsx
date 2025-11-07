@@ -1,7 +1,39 @@
-import { Link, useLoaderData } from "react-router";
+import { Link, useLoaderData, useNavigate } from "react-router";
+import useAxios from "../hook/useAxios";
+import Swal from "sweetalert2";
 
 const ModelDetails = () => {
     const model = useLoaderData().data
+    const axiosInstance = useAxios()
+    const navigate = useNavigate()
+    const handleDlete = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosInstance.delete(`/models/${model._id}`)
+                    .then(data => {
+                        if (data.data.deletedCount) {
+                            Swal.fire({
+                                title: "Delete!",
+                                text: "Your Model has been Deleted.",
+                                icon: "success"
+                            });
+                            navigate(`/all-models`)
+                        }
+                    })
+            }
+        });
+
+
+
+    }
     return (
         <div className="max-w-5xl mx-auto p-4 md:p-6 lg:p-8">
             <div className="card bg-base-100 shadow-xl border border-gray-200 rounded-2xl overflow-hidden">
@@ -47,7 +79,7 @@ const ModelDetails = () => {
                                 Download
                             </button>
                             <button
-                                onClick={"handleDlete"}
+                                onClick={handleDlete}
                                 className="btn btn-outline rounded-full border-gray-300 hover:border-pink-500 hover:text-pink-600"
                             >
                                 Delete
