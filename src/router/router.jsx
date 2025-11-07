@@ -8,6 +8,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AllModels from "../pages/AllModels";
+import UpdateModel from "../pages/UpdateModel";
 export const router = createBrowserRouter([
     {
         path:'/',
@@ -41,7 +42,12 @@ export const router = createBrowserRouter([
                 path:'/all-models',
                 Component:AllModels,
                  loader:()=>axios.get(`http://localhost:3000/models`)
-            }
+            },
+            {
+                path:'/update-model/:id',
+                Component:UpdateModel,
+                 loader:({params})=>axios.get(`http://localhost:3000/model-details/${params.id}`)
+            },
 
         ]
     }
