@@ -11,6 +11,7 @@ import AllModels from "../pages/AllModels";
 import UpdateModel from "../pages/UpdateModel";
 import MyModels from "../pages/MyModels";
 import MyDownlod from "../pages/MyDownlod";
+import Profile from "../pages/Profile";
 export const router = createBrowserRouter([
     {
         path:'/',
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
             {
                 path:'/my-downloads',
                 element:<PrivateRoute><MyDownlod/></PrivateRoute>
+            },
+            {
+                path:'/profile',
+                Component:Profile
             }
 
         ]

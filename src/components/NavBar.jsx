@@ -8,8 +8,6 @@ import { ImBoxAdd } from "react-icons/im";
 import { use, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 
-// import { AuthContext } from "../context/AuthContext";
-
 const NavBar = () => {
   const { user, logoutUser,loading } = use(AuthContext);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
