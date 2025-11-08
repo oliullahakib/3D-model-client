@@ -12,7 +12,6 @@ import { AuthContext } from "../Context/AuthContext";
 
 const NavBar = () => {
   const { user, logoutUser,loading } = use(AuthContext);
-  console.log(user)
   const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
 
   useEffect(() => {
