@@ -19,21 +19,22 @@ const AddModal = () => {
       created_by: user?.email
     }
 
-    axiosInstance.post("/models",formData)
-    .then(data=> {
+    axiosInstance.post("/models", formData)
+      .then(data => {
 
-      if(data.data.insertedId){
-      Swal.fire({
-      title: "Added!",
-      text: "Your Model has been Added.",
-      icon: "success"
-    });
-      }
-    })
-    .catch(err => {
-      console.log(err)
-    })
-   
+        if (data.data.insertedId) {
+          Swal.fire({
+            title: "Added!",
+            text: "Your Model has been Added.",
+            icon: "success"
+          });
+          e.target.reset()
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
 
   }
 
@@ -85,7 +86,7 @@ const AddModal = () => {
               name="description"
               required
               rows="3"
-             className="textarea w-full rounded-2xl focus:border-0 focus:outline-gray-200 h-[250px]"
+              className="textarea w-full rounded-2xl focus:border-0 focus:outline-gray-200 h-[250px]"
               placeholder="Enter description"
             ></textarea>
           </div>

@@ -3,21 +3,21 @@ import Banner from "../components/Banner";
 import { ModelCard } from "../components/ModelCard";
 
 const Home = () => {
-    const models = useLoaderData()
-    return (
-        <div>
-              <Banner/>
-            <div className="text-center text-xl font-bold mt-10">Latest Model</div>
-             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-10">
-            
-            {
-              models.data.map(model=><ModelCard key={model._id} model={model} />)
-            }
-           
+  const models = useLoaderData()
+  return (
+    <div>
+      <Banner />
+      <div className="text-center text-xl font-bold mt-10">Latest Model</div>
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-10">
+
+        {
+          models.data.map(model => <ModelCard key={model._id} model={model} />)
+        }
+
       </div>
-            
-        </div>
-    );
+
+    </div>
+  );
 };
 
 export default Home;
