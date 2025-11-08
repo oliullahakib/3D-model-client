@@ -10,6 +10,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 import AllModels from "../pages/AllModels";
 import UpdateModel from "../pages/UpdateModel";
 import MyModels from "../pages/MyModels";
+import MyDownlod from "../pages/MyDownlod";
 export const router = createBrowserRouter([
     {
         path:'/',
@@ -23,7 +24,7 @@ export const router = createBrowserRouter([
             {
                 path:'/model-details/:id',
                 element:<PrivateRoute><ModelDetails/></PrivateRoute>,
-                 loader:({params})=>axios.get(`http://localhost:3000/model-details/${params.id}`)
+                
             },
             {
                 path:'/add-model',
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
             {
                 path:'/my-models',
                 element:<PrivateRoute><MyModels/></PrivateRoute>
+            },
+            {
+                path:'/my-downloads',
+                element:<PrivateRoute><MyDownlod/></PrivateRoute>
             }
 
         ]

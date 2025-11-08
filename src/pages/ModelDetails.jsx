@@ -1,10 +1,33 @@
-import { Link, useLoaderData, useNavigate } from "react-router";
+import { Link, useNavigate, useParams } from "react-router";
 import useAxios from "../hook/useAxios";
 import Swal from "sweetalert2";
+import { use, useEffect, useState } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
 const ModelDetails = () => {
-    const model = useLoaderData().data
+    const [model, setModel] = useState([])
+    const {id}=useParams()
+    const [reset, setReset] = useState(false)
     const axiosInstance = useAxios()
+    
+    const { user } = use(AuthContext)
+    useEffect(() => {
+        axiosInstance.get(`http://localhost:3000/model-details/${id}`)
+            .then(data => {
+                setModel(data.data)
+            })
+    }, [axiosInstance,reset,id])
+
+    const newModel = {
+        category: model.category,
+        created_at: new Date().toLocaleDateString(),
+        created_by: user.email,
+        description: model.description,
+        downloads: 0,
+        name: model.name,
+        thumbnail: model.thumbnail
+    }
+
     const navigate = useNavigate()
     const handleDlete = () => {
         Swal.fire({
@@ -33,6 +56,25 @@ const ModelDetails = () => {
 
 
 
+    }
+    const handleDownload = () => {
+        axiosInstance.post(`/downlod/${model._id}`, newModel)
+            .then(data => {
+                console.log(data)
+                if (data.data.result.insertedId) {
+                    Swal.fire({
+                        title: "Downlod!",
+                        text: "Your Model has been Downloded.",
+                        icon: "success"
+                    });
+                    
+                }
+                if (data.data.dwonlodCount.modifiedCount) {
+                    console.log("count")
+                   setReset(!reset)
+                    
+                } 
+            })
     }
     return (
         <div className="max-w-5xl mx-auto p-4 md:p-6 lg:p-8">
@@ -73,7 +115,7 @@ const ModelDetails = () => {
                                 Update Model
                             </Link>
                             <button
-                                onClick={"handleDownload"}
+                                onClick={handleDownload}
                                 className="btn btn-secondary rounded-full"
                             >
                                 Download
