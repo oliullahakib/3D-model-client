@@ -3,22 +3,22 @@ import { use, useEffect } from "react";
 import { AuthContext } from "../Context/AuthContext";
 
 const instance = axios.create({
-     baseURL: 'http://localhost:3000'
+    baseURL: 'https://3d-model-server-six.vercel.app'
 })
 
 const useAxiosSecure = () => {
-    const {user}=use(AuthContext)
+    const { user } = use(AuthContext)
     useEffect(() => {
-     const reqInterceptor = instance.interceptors.request.use(config=>{
-        config.headers. authorization=`Bearer ${user.accessToken}`
-        return config
-     })
-    
-      return ()=>{
-        instance.interceptors.request.eject(reqInterceptor)
-      }
+        const reqInterceptor = instance.interceptors.request.use(config => {
+            config.headers.authorization = `Bearer ${user.accessToken}`
+            return config
+        })
+
+        return () => {
+            instance.interceptors.request.eject(reqInterceptor)
+        }
     }, [user])
-    
+
     return instance
 };
 

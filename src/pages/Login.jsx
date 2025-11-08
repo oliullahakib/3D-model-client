@@ -8,17 +8,15 @@ const Login = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location);
+
 
   const handleLogIn = (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    console.log(email, password);
     loginUser(email, password)
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
         event.target.reset();
         navigate(location.state || "/");
       })
@@ -29,8 +27,7 @@ const Login = () => {
 
   const handleGoogleSignIn = () => {
     loginWithGoogle()
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
         navigate(location?.state || "/");
       })
       .catch((error) => {

@@ -14,54 +14,54 @@ import MyDownlod from "../pages/MyDownlod";
 import Profile from "../pages/Profile";
 export const router = createBrowserRouter([
     {
-        path:'/',
-        Component:MainLayout,
-        children:[
+        path: '/',
+        Component: MainLayout,
+        children: [
             {
-                index:true,
-                Component:Home,
-                loader:()=>axios.get('http://localhost:3000/recent-model')
+                index: true,
+                Component: Home,
+                loader: () => axios.get('https://3d-model-server-six.vercel.app/recent-model')
             },
             {
-                path:'/model-details/:id',
-                element:<PrivateRoute><ModelDetails/></PrivateRoute>,
-                
+                path: '/model-details/:id',
+                element: <PrivateRoute><ModelDetails /></PrivateRoute>,
+
             },
             {
-                path:'/add-model',
-                element:<AddModel/>
+                path: '/add-model',
+                element: <AddModel />
             },
             {
-                path:'/auth/login',
-                element:<Login/>
+                path: '/auth/login',
+                element: <Login />
             }
             ,
             {
-                path:'/auth/register',
-                Component:Register
+                path: '/auth/register',
+                Component: Register
             },
-            
+
             {
-                path:'/all-models',
-                Component:AllModels,
-                 loader:()=>axios.get(`http://localhost:3000/models`)
-            },
-            {
-                path:'/update-model/:id',
-                Component:UpdateModel,
-                 loader:({params})=>axios.get(`http://localhost:3000/model-details/${params.id}`)
+                path: '/all-models',
+                Component: AllModels,
+                loader: () => axios.get(`https://3d-model-server-six.vercel.app/models`)
             },
             {
-                path:'/my-models',
-                element:<PrivateRoute><MyModels/></PrivateRoute>
+                path: '/update-model/:id',
+                Component: UpdateModel,
+                loader: ({ params }) => axios.get(`https://3d-model-server-six.vercel.app/model-details/${params.id}`)
             },
             {
-                path:'/my-downloads',
-                element:<PrivateRoute><MyDownlod/></PrivateRoute>
+                path: '/my-models',
+                element: <PrivateRoute><MyModels /></PrivateRoute>
             },
             {
-                path:'/profile',
-                Component:Profile
+                path: '/my-downloads',
+                element: <PrivateRoute><MyDownlod /></PrivateRoute>
+            },
+            {
+                path: '/profile',
+                Component: Profile
             }
 
         ]

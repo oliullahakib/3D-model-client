@@ -6,17 +6,17 @@ import { AuthContext } from "../Context/AuthContext";
 
 const ModelDetails = () => {
     const [model, setModel] = useState([])
-    const {id}=useParams()
+    const { id } = useParams()
     const [reset, setReset] = useState(false)
     const axiosInstance = useAxios()
-    
+
     const { user } = use(AuthContext)
     useEffect(() => {
-        axiosInstance.get(`http://localhost:3000/model-details/${id}`)
+        axiosInstance.get(`https://3d-model-server-six.vercel.app/model-details/${id}`)
             .then(data => {
                 setModel(data.data)
             })
-    }, [axiosInstance,reset,id])
+    }, [axiosInstance, reset, id])
 
     const newModel = {
         category: model.category,
@@ -60,20 +60,18 @@ const ModelDetails = () => {
     const handleDownload = () => {
         axiosInstance.post(`/downlod/${model._id}`, newModel)
             .then(data => {
-                console.log(data)
                 if (data.data.result.insertedId) {
                     Swal.fire({
                         title: "Downlod!",
                         text: "Your Model has been Downloded.",
                         icon: "success"
                     });
-                    
+
                 }
                 if (data.data.dwonlodCount.modifiedCount) {
-                    console.log("count")
-                   setReset(!reset)
-                    
-                } 
+                    setReset(!reset)
+
+                }
             })
     }
     return (
